@@ -14,30 +14,31 @@ const handlesubmit = function(ev) {
 }
 form.addEventListener('submit', handlesubmit)
 
-function renderList(newAdd){
+function renderList(newAdd) {
   const ul = document.createElement('tr');
   Object.keys(newAdd).map(key => {
     const item = renderListIterm(key, newAdd[key])
     ul.appendChild(item)
   })
-const button = document.createElement('button')
-button.textContent = 'delete'
-button.class = "delete"
-ul.appendChild(button)
+  const button = document.createElement('button')
+  button.textContent = 'delete'
+  button.class = "delete"
+  ul.appendChild(button)
   return ul
 }
+
 function renderListIterm(ul, items) {
   const li = document.createElement('td')
-    li.textContent += `${items}`
-
+  li.textContent += `${items}`
+  // localStorage.setItem(ul, items)
   return li;
 }
-$('table').on('click','button',function(e){
+$('table').on('click', 'button', function(e) {
   e.preventDefault();
   let tempName = $(this).closest('tr').find('td').eq(0).html();
   $(this).closest('tr').remove();
   console.log(tempName);
   let index = globalArr.indexOf(tempName);
+  // localStorage.removeItem(tempName)
   globalArr.splice(index, 1);
-  debugger
 });
