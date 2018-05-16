@@ -1,0 +1,16 @@
+/* li {
+  float: left;
+  display: block;
+  width: 100px;
+  height: 40px;
+}
+ul {
+  list-style: none outside none;
+}
+dt, dd {
+  float: left; display: block; width: 50%
+}
+dt {
+  clear: left;
+}
+ */
