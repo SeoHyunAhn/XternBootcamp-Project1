@@ -24,9 +24,10 @@ const app = {
             id: ++this.max,
             name: f.flickName.value,
         }
-        this.flicks.push(flick)
+        this.flicks.unshift(flick) //역순으로 어레이에 저장 그냥 push면 오는 족족 넣음
+
         const item = this.renderListItem(flick)
-        this.list.appendChild(item)
+        this.list.insertBefore(item, this.list.firstElementChild)
         console.log(flick);
         f.reset()
     },
