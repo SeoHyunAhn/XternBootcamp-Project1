@@ -19,14 +19,20 @@
             <div class="input-group">
                 <input type="text" class="input-group-field" placeholder="Name a flick" name="flickName" autofocus required>
                 <div class="input-group-button">
-                    <button class="button" type="submit">
+                    <button class=" button" type="submit">
                         Add flick
                     </button>
                 </div>
             </div>
         </form>
-        <ul id="flickList" >
-            <!-- <li data-id="9"></li> -->
+        <ul id="flickList" class="no-bullet">
+            <li class="template flick grid-x align-middle">
+                <span class="flickName auto cell">Some kind of name</span>
+                <span class="actions shrink cell">
+                    <button class="button">fav</button>
+                    <button class="alert button">del</button>
+                </span>
+            </li>
         </ul>
     </main>
     <script src="index.js"></script>
