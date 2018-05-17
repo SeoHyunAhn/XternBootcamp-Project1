@@ -1,12 +1,4 @@
-table {
-  width: 100%;
-  color: #333;
-}
-td, tr {
-  border: 1px solid #0000000;
-  height: 20px;
-  transition: all 1s;
-}
+
 @import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
 @import url('https://fonts.googleapis.com/css?family=Skranji');
 body {
@@ -25,4 +17,13 @@ main {
 }
 div {
   padding-top: 3rem;
+}
+table {
+  width: 100%;
+  color: #333;
+}
+td, tr {
+  border: 1px solid #0000000;
+  height: 20px;
+  transition: all 1s;
 }
