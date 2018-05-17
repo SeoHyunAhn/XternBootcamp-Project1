@@ -10,13 +10,13 @@ const app = {
                 this.handelSubmit(ev)
             })
     },
-    renderListItem: function(flick){
+    renderListItem(flick){
         const item = document.createElement('li')
         item.textContent = flick.name
         return item;
     },
 
-    handelSubmit: function (ev) {
+    handelSubmit(ev) {
         const f = ev.target
         const flick = {
             id: ++this.max,
