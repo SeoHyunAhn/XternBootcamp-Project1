@@ -17,10 +17,11 @@ class App {
         item.dataset.id = flick.id
         item.querySelector('.flickName').textContent = flick.name
         item.querySelector('.remove.button').addEventListener('click', this.handledelete.bind(this, flick))
-        item.querySelector('.button').addEventListener('click', (ev) => {
-            ev.preventDefault()
-            this.handlefav(ev)
-        })
+        item.querySelector('.fav.button').addEventListener('click', this.handlefav.bind(this, flick))
+        // item.querySelector('.button').addEventListener('click', (ev) => {
+        //     ev.preventDefault()
+        //     this.handlefav(ev)
+        // })
         return item;
     }
 
@@ -39,15 +40,19 @@ class App {
         f.reset()
     }
 
-    handlefav(ev) {
-        const t = ev.target
-        const li = t.closest('.flick')
-        li.style.background = "yellow"
-        for(let i=0; i < this.flicks.length; i++){
-            if(this.flicks[i].id.toString() == li.dataset.id){
-                this.flicks[i].fav = true
-            }
-        }
+    handlefav(flick, ev) {
+        const event = ev.target
+        const li = event.closest('.flick')
+        flick.fav = li.classList.toggle('fav')
+
+        // const t = this.flicks.indexOf(flick)
+        // if (this.flicks[t].fav == false ){
+        //     this.flicks[t].fav = true
+        //     li.style.background = "blue"
+        // }else {
+        //     this.flicks[t].fav = false
+        //     li.style.background = "white"
+        // }
         
     }
 
@@ -57,6 +62,7 @@ class App {
         const li = btn.closest('.flick')
         //Can use ev.target.parentNode.parentNode but it will break if not li
         //So we can use cloest(li) but as we have an id for li, we can write with flick
+        
         // for(let i=0; i < this.flicks.length; i++){
         //     if(this.flicks[i].id.toString() == li.dataset.id){
         //         this.flicks.splice(i,1);

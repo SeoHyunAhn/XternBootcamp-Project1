@@ -10,3 +10,7 @@ main {
 .template {
     display: none;
 }
+
+.flick.fav {
+    background-color: aqua;
+}
