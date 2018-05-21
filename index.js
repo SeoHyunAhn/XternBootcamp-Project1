@@ -15,14 +15,45 @@ class App {
         const item = this.template.cloneNode(true)
         item.classList.remove('template')
         item.dataset.id = flick.id
-        item.querySelector('.flickName').textContent = flick.name
+        const namespan = item.querySelector('.flickName')
+        namespan.textContent = flick.name
+        namespan.addEventListener('keypress', this.saveOnEnter.bind(this, flick))
         item.querySelector('.remove.button').addEventListener('click', this.handledelete.bind(this, flick))
         item.querySelector('.fav.button').addEventListener('click', this.handlefav.bind(this, flick))
+        item.querySelector('.edit.button').addEventListener('click', this.handleEdit.bind(this, flick))
+        
         // item.querySelector('.button').addEventListener('click', (ev) => {
         //     ev.preventDefault()
         //     this.handlefav(ev)
         // })
         return item;
+    }
+    saveOnEnter(flick, ev){
+        if (ev.key === 'Enter'){
+            this.handleEdit(flick, ev)
+        }
+    }
+
+
+    handleEdit(flick, ev) {
+        const item = ev.target.closest('.flick')
+        const btn = item.querySelector('.edit.button')
+        const nameField = item.querySelector('.flickName')
+        // nameField.contentEditable = !nameField.isContentEditable  << This works too!!
+        if (nameField.isContentEditable){
+            //make it no longer editable
+            nameField.contentEditable = false
+            btn.textContent = "edit"
+            btn.classList.remove('success')
+            flick.name = nameField.textContent
+        }else {
+            //make it editable
+            nameField.contentEditable = true
+            nameField.focus()
+            btn.textContent = 'save'
+            btn.classList.add('success')
+        }
+
     }
 
     handelSubmit(ev) {
@@ -62,7 +93,7 @@ class App {
         const li = btn.closest('.flick')
         //Can use ev.target.parentNode.parentNode but it will break if not li
         //So we can use cloest(li) but as we have an id for li, we can write with flick
-        
+
         // for(let i=0; i < this.flicks.length; i++){
         //     if(this.flicks[i].id.toString() == li.dataset.id){
         //         this.flicks.splice(i,1);
