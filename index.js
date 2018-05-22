@@ -1,5 +1,5 @@
 class App {
-   constructor(selectors) {
+    constructor(selectors) {
         this.flicks = []
         this.max = 0
         this.list = document.querySelector(selectors.listselector)
@@ -21,16 +21,51 @@ class App {
         item.querySelector('.remove.button').addEventListener('click', this.handledelete.bind(this, flick))
         item.querySelector('.fav.button').addEventListener('click', this.handlefav.bind(this, flick))
         item.querySelector('.edit.button').addEventListener('click', this.handleEdit.bind(this, flick))
-        
-        // item.querySelector('.button').addEventListener('click', (ev) => {
-        //     ev.preventDefault()
-        //     this.handlefav(ev)
-        // })
+        item.querySelector('button.move-up').addEventListener('click', this.moveUp.bind(this, flick, item))
+
+        item.querySelector('button.move-down').addEventListener('click', this.moveDown.bind(this, flick, item))
         return item;
     }
-    saveOnEnter(flick, ev){
-        if (ev.key === 'Enter'){
+    saveOnEnter(flick, ev) {
+        if (ev.key === 'Enter') {
             this.handleEdit(flick, ev)
+        }
+    }
+    moveDown(flick, item) {
+        const i = this.flicks.indexOf(flick)
+
+        if (i < this.flicks.length - 1) {
+            this.moveUp(this.flicks[i + 1], item.nextElementSibling)
+        }
+    }
+
+    moveUp(flick, item) {
+        const i = this.flicks.indexOf(flick)
+
+        if (i > 0) {
+            this.list.insertBefore(item, item.previousElementSibling)
+
+            const previousFlick = this.flicks[i - 1]
+            this.flicks[i - 1] = flick
+            this.flicks[i] = previousFlick
+        }
+    } moveDown(flick, item) {
+        const i = this.flicks.indexOf(flick)
+
+        if (i < this.flicks.length - 1) {
+            this.moveUp(this.flicks[i + 1], item.nextElementSibling)
+        }
+    }
+
+    moveUp(flick, item) {
+        const i = this.flicks.indexOf(flick)
+
+        if (i > 0) {
+            this.list.insertBefore(item, item.previousElementSibling)
+
+            const previousFlick = this.flicks[i - 1]
+            this.flicks[i - 1] = flick
+            this.flicks[i] = previousFlick
         }
     }
 
@@ -40,13 +75,13 @@ class App {
         const btn = item.querySelector('.edit.button')
         const nameField = item.querySelector('.flickName')
         // nameField.contentEditable = !nameField.isContentEditable  << This works too!!
-        if (nameField.isContentEditable){
+        if (nameField.isContentEditable) {
             //make it no longer editable
             nameField.contentEditable = false
             btn.textContent = "edit"
             btn.classList.remove('success')
             flick.name = nameField.textContent
-        }else {
+        } else {
             //make it editable
             nameField.contentEditable = true
             nameField.focus()
@@ -84,7 +119,7 @@ class App {
         //     this.flicks[t].fav = false
         //     li.style.background = "white"
         // }
-        
+
     }
 
     handledelete(flick, e) {
@@ -100,7 +135,7 @@ class App {
         //     }
         // }
         const t = this.flicks.indexOf(flick)
-        this.flicks.splice(t,1);
+        this.flicks.splice(t, 1);
         //loop through array 
         li.remove()
     }

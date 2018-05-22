@@ -14,3 +14,17 @@ main {
 .flick.fav {
     background-color: aqua;
 }
+actions .button,
+.actions.button-group {
+   margin-bottom: 0;
+ }
+ flick {
+    margin-bottom: 1px;
+}
+
+.flick:first-child button.move-up,
+.flick:last-child button.move-down {
+  background-color: #ddd;
+ color: #eee;
+  cursor: not-allowed;
+}
